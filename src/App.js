@@ -1,24 +1,51 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import PropTypes from 'prop-types';
+
+var favoliteFoodList = [
+  {
+    id: 1,
+    name: "Kimchi",
+    image: "https://www.koreanbapsang.com/wp-content/uploads/2016/10/DSC_1843-e1477360668451.jpg",
+    rating: 4.9
+  },
+  {
+    id: 2,
+    name: "Bossam",
+    image: "https://www.koreanbapsang.com/wp-content/uploads/2013/11/DSC_2047-r-e1483111500205.jpg",
+    rating: 4.8
+  },
+  {
+    id: 3,
+    name: "Gimbap",
+    image: "https://www.koreanbapsang.com/wp-content/uploads/2012/05/DSC_0406-1-e1536289445158.jpg",
+    rating: 4.5
+  }
+];
+
+function Food({name, picture, rating}) {
+  return (
+    <div>
+      <h3>I like {name}.</h3>
+      <h4>{rating}/5.0</h4>
+      <img src={picture} alt={name} />
+    </div>
+  );
+}
+
+Food.propTypes = {
+  name: PropTypes.string.isRequired,
+  picture: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Hello!</h1>
+      {favoliteFoodList.map(dish => {
+        return <Food key={dish.id} name={dish.name} picture={dish.image} rating={dish.rating}/>
+      })}
     </div>
   );
 }
